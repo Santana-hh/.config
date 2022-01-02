@@ -15,16 +15,17 @@
 ;   The README contains a lot of information
 ;
 ;==========================================================
-
+#0f1024 blue , f4e4e4 white, 7b75bd purple
 [colors]
-background = "#991d1f21"
-foreground = "#e6d2af"
-primary = "${xrdb:color4}"
+background = "#0f1024"
+foreground = "#f4e4e4"
+primary = "#7b75bd"
 alert = "ff0000"
+
 
 [bar/topbar]
 width = 100%
-height = 32
+height = 38
 offset-y = 0
 offset-x = 0
 radius = 0.0
@@ -32,144 +33,98 @@ fixed-center = true
 override-redirect = false
 background = ${colors.background}
 foreground = ${colors.foreground}
+line-size = 4
+line-color = ${colors.foreground}
 
-border-size = 0
+border-size = 8
 border-color = #00000000
 
-padding-left = 4
-padding-right = 4
+padding-left = 13
+padding-right = 18
 
 module-margin-left = 4
 module-margin-right = 4
 
-font-0 = VictorMono Nerd Font:stlye=Bold:antialias=true:size=13
-font-1 = VictorMono Nerd:style=Regular:size=22.5
+font-0 = Vogue:stlye=Bold:antialias=true:size=15;3
+font-1 = Symbols Nerd Font:style=Regular:size=14.5;3.5
+font-2 = unifont
 
-modules-left = i3 cpu memory temperature 
+modules-left = i3  
 modules-center = date
-modules-right = clementine volume
-tray-position = none
+modules-right = volume
+tray-position = center
 tray-padding = 4
 tray-maxsize = 0
 
 
 [module/i3]
 type = internal/i3
+index-sort = true
 format = <label-state> <label-mode>
 
-;scroll function rules
-wrapping-scroll = false
+ws-icon-1 = 1;./
+ws-icon-2 = 2;./
+ws-icon-3 = 3;./
+ws-icon-4 = 4;./
+ws-icon-5 = 5;./
+ws-icon-6 = 6;./
+ws-icon-7 = 7;./
+ws-icon-8 = 8;./
+
+enable-scroll = false
+strip-wsnumbers = true
 
 ;label mode
 
-
-;icons
-ws-icon-1 = 1;
-ws-icon-2 = 2;
-ws-icon-3 = 3;
-ws-icon-4 = 4;
-ws-icon-5 = 5;
-ws-icon-6 = 6;
-ws-icon-7 = 7;
-ws-icon-8 = 8;
+label-focused = %name%
+label-focused-foreground = ${colors.background}
+label-focused-background = ${colors.foreground}
+label-focused-underline = #00000000
+label-focused-padding = 2
 
 
 ; seperator
-label-separator = .
+label-separator = ︚
 label-separator-padding = 1
-label-separator-foreground = ${colors.background}
+label-separator-foreground = #7b75bd
 
-[module/cpu]
-type = internal/cpu
-interval = 1
-format-prefix = "  "
-label = %percentage:2%%
-format-padding = 3
-
-####FIX#####
-#[module/network]
-#type = internal/network
-#interface = wlo1
-#interval = 3.0
-#format-connected = <label-connected> 
-#label-connected = %{A1:networkmanager_dmenu:} %downspeed%  %upspeed% | %essid%%{A}
-
-#format-disconnected = 
-#format-disconnected-foreground = ${colors.alert}
 
 [module/date]
 type = internal/date
 interval = 1
-date = %A, %d %B %Y
+date = %A, %d %B
 time = %H:%M:%S
 
-#format-prefix = " "
-format-padding = 2
-
 label = %date% %time%
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 70
-
-format = <ramp> <label>
-format-warn = <ramp> <label-warn>
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-background = #400
-label-warn-padding = 1
-
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-3 = 
-ramp-4 = 
-
-format-padding = 1
 
 [module/volume]
 type = internal/pulseaudio
 
-format-volume = <ramp-volume> <label-volume>
-format-muted = <ramp-volume> <label-muted>
-format-muted-foreground = ${colors.alert}
+format-volume = <label-volume> <bar-volume> 
+label-volume = VOL 
+label-volume-foreground = ${root.foreground}
 
-label-volume = "%percentage%%"
-label-muted = "%percentage%%"
+label-muted = MUTED
+label-muted-foreground = #666
 
 bar-volume-width = 10
+bar-volume-foreground-0 = #7b75bd
+bar-volume-foreground-1 = #7b75bd
+bar-volume-foreground-2 = #7b75bd
+bar-volume-foreground-3 = #7b75bd
+bar-volume-foreground-4 = #7b75bd
+bar-volume-foreground-5 = #7b75bd
+bar-volume-foreground-6 = #7b75bd
+bar-volume-gradient = false
 bar-volume-indicator = |
+bar-volume-indicator-font = 2
 bar-volume-fill = ─
+bar-volume-fill-font = 2
 bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
 
-ramp-volume-0 = ""
-ramp-volume-1 = ""
-ramp-volume-2 = ""
-
-click-left = pulsemixer --toggle-mute
-scroll-up = pulsemixer --change-volume +1
-scroll-down = pulsemixer --change-volume -1
-
-interval = 5
-
-[module/memory]
-type = internal/memory
-interval = 2
-
-format = <label>
-label = " %gb_used% / %gb_total%"
-
-[module/clementine]
-type = custom/script
-exec = ~/.config/polybar/myScripts/clementine_test.sh
-label = %output%
-format = <label>
-interval = 1
-
-
-format-padding = 3
+click-right = pavucontrol
 
 ; ------------------------ END OF MODULES ----------
 
